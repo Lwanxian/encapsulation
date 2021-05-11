@@ -89,9 +89,13 @@ export default {
         this.y2arr.push(this.Testresult[r]);
         this.z2arr.push(this.Testresult[q]);
       }
+      // 绘制坐标点下标为1的球体
       this.initObject();
+      // 绘制坐标点下标为1球体的连接线
       this.initLine();
+      // 绘制坐标点下标为2的球体
       this.initObject2();
+      // 绘制坐标点下标为2球体的连接线
       this.initLine2();
     },
     //绘制（x1,y1,z1）的球体
@@ -125,20 +129,14 @@ export default {
       const materialine = new THREE.LineBasicMaterial({ color: 0x0000ff });
       const points = [];
       for (let u = 0; u < this.x1arr.length; u++) {
-        points.push(
-          new THREE.Vector3(
-            this.x1arr[u] / window.innerWidth + u,
-            this.y1arr[u] / window.innerHeight + u,
-            this.z1arr[u] / 1000
-          )
-        );
-      }
+        points.push(new THREE.Vector3(this.x1arr[u] / window.innerWidth + u,this.y1arr[u] / window.innerHeight + u,this.z1arr[u] / 1000));
+      } 
       const geometryline = new THREE.BufferGeometry().setFromPoints(points);
       this.line = new THREE.Line(geometryline, materialine);
       this.scene.add(this.line);
     },
     // 绘制(x2,y2,z2)的球体
-    initObject2() {
+    initObject2() { 
       /* 
       SphereGeometry球体 
       材质对象
@@ -186,7 +184,7 @@ export default {
       场景背景色设置
       */
       this.scene = new THREE.Scene();
-      this.scene.background = new THREE.Color(0x33dd99);
+      this.scene.background = new THREE.Color(0x33dd99);//
 
       /* PerspectiveCamera透视相机
       param1 视角即可以看到的角度范围，人的视场大约是180度，一般游戏的视场为60度到90度，推荐默认值45
@@ -194,12 +192,7 @@ export default {
       param3 基于相机位置，表示从这里开始渲染场景；一般会设置一个很小的值，推荐默认值0.1
       param4 基于相机位置，表示停止渲染的位置；要注意设置合适的距离，如果设置太小，部分场景可能渲染不到，但如果设置的太大，会影响渲染的效率，默认值1000
       */
-      this.camera = new THREE.PerspectiveCamera(
-        90,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-      );
+      this.camera = new THREE.PerspectiveCamera(90,window.innerWidth / window.innerHeight,0.1,1000);
       this.camera.position.set(20, 20, 20);
 
       /*  灯光 
